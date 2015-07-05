@@ -1,0 +1,7 @@
+How to import Miro Excel sheet into Laravel
+
+Step 2
+http://www.maatwebsite.nl/laravel-excel/docs/import
+
+Step 1
+https://github.com/Maatwebsite/Laravel-Excel
