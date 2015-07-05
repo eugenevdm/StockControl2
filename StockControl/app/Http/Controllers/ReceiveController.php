@@ -79,6 +79,8 @@ class ReceiveController extends Controller
 
         dd($item->sku_code);
 
+        //$res = Inventory::findBySku(Input::get('sku'));
+
         //$item = Inventory::find(1);
         //dd($item);
     }

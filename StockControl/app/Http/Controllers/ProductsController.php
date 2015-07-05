@@ -30,34 +30,13 @@ class ProductsController extends Controller
 
         $res = DB::table('inventories')
             ->join('inventory_skus', 'inventory_skus.id', '=', 'inventories.id')
-            ->select('inventories.*', 'inventory_skus.code')
+            ->join('inventory_stocks', 'inventory_stocks.id', '=', 'inventories.id')
+            ->select('inventories.*', 'inventory_skus.code', 'inventory_stocks.quantity')
             ->where('code', 'LIKE', "%$query%")
             ->get();
 
-//        $res = Inventory::
-//            ->sku()
-//        ->getRelated()
-//        ->with('item')
-//        ->where('code', $sku)
-//        ->first();
-
-        //SQL
-        $sql = "select * from inventories join inventory_skus on inventory_skus.id = inventories.id;";
-
-
-        //$res = Product::where('sku', 'LIKE', "%$query%")->get();
-
         //$res = Product::where('name', 'LIKE', "%$query%")->get();
 
-        //$res = Inventory::with('sku')->get();
-
-//        $res = Inventory::with('sku')->whereHas('sku', function($query) {
-//                $query->where('code', 'LIKE', "%query%")->get();
-//            });
-
-        //$res = Inventory::findBySku(Input::get('sku'));
-
-        //$res = Inventory::where('sku', 'LIKE', "%$query%")->get();
         return Response::json($res);
     }
 

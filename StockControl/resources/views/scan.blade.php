@@ -81,9 +81,9 @@
         );
 
         $('input[name=name]').on('typeahead:selected', function (evt, item) {
-            $('#sku').val(item.sku);
+            $('#sku').val(item.code);
             $('#price').val(item.price);
-            $('#qty').val(item.qty);
+            $('#qty').val(item.quantity);
             $("#newQty").focus();
         });
 
