@@ -82,6 +82,30 @@ class ReceiveController extends Controller
 
         //$item = Inventory::find(1);
         //dd($item);
+
+        $supplier = new Supplier;
+
+//Mandatory fields
+        $supplier->name = 'Miro Distribution';
+
+//Optional fields
+        $supplier->address = 'Montague Gardens';
+        $supplier->postal_code = '8000';
+        $supplier->zip_code = '12345';
+        $supplier->country = 'South Africa';
+        $supplier->region = 'Western Cape';
+        $supplier->city = 'Cape Town';
+        $supplier->contact_title = 'Sales Rep';
+        $supplier->contact_name = 'Mark Sparky';
+        $supplier->contact_phone = '555 555-5555';
+        $supplier->contact_fax = '555 555-5556';
+        $supplier->contact_email = 'mark@miro.co.za';
+
+        $supplier->save();
+
+        $item = Inventory::find(1);
+        //$supplier = Supplier::find(1);
+        $item->addSupplier($supplier);
     }
 
     /**

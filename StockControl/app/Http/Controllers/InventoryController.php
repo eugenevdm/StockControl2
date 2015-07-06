@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Stevebauman\Inventory\Models\Inventory;
-use Stevebauman\Inventory\Models\Supplier;
 
-class StartController extends Controller
+class InventoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +18,8 @@ class StartController extends Controller
      */
     public function index()
     {
-
-
-
-        return view('start');
+        $inventories = Inventory::paginate(10);
+        return view('inventory.index', compact('inventories', 'paginator'));
     }
 
     /**
