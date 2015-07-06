@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('home', 'MovementsController@index');
+
 Route::get('movements', 'MovementsController@index');
 
 Route::get('locations', 'LocationsController@index');
@@ -34,6 +36,7 @@ Route::get('start', 'StartController@index');
 
 Route::get('oauth/{provider?}', 'Auth\SocialAuthController@login');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
+//Route::get('/', function () {
+//    return view('welcome');
+//});

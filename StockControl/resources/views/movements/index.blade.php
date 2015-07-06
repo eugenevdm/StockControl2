@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <h3>Movements</h3>
+
     <table class="table table-hover">
     <thead>
     <tr>

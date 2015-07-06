@@ -2,9 +2,7 @@
 
 @section('content')
 
-    <div class="btn-toolbar">
-        <a class="btn btn-lg btn-default" href="/scan/">Stock In</a>
-    </div>
+    <h3>Stock In</h3>
 
     <form role="scan" action="receive">
 
