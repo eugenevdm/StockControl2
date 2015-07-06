@@ -6,21 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Stevebauman\Inventory\Models\Location;
+use Illuminate\Support\Facades\DB;
 
-
-//namespace App\Http\Controllers;
-
-use App\Project;
-use App\User;
-use DB;
-use Illuminate\Pagination\Paginator;
-use Input;
-use Auth;
-//use Illuminate\Http\Request;
-use Redirect;
-
-class ScanController extends Controller
+class MovementsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,9 +17,8 @@ class ScanController extends Controller
      */
     public function index()
     {
-        //$locations = Location::all();
-        $locations = Location::orderBy('name')->lists('name', 'id');
-        return view('scan', compact('locations'));
+        $movements = DB::table('inventory_stock_movements')->get();
+        return view ('movements.index', compact('movements'));
     }
 
     /**

@@ -27,22 +27,35 @@ class ReceiveController extends Controller
     {
         $newStock = Input::get('name');
         echo "Name: " . $newStock;
+        echo "<br>";
 
-        //$item = Inventory::findBySku(Input::get('sku'));
         $item = Inventory::findBySku(Input::get('sku'));
-        //$item = Inventory::findBySku(Input::get('sku'));
-
-        //$supplier = Supplier::with('products')->whereName($name)->first();
+        $location = Location::find(Input::get('location_id'));
 
         if ($item) {
-            echo "Found item by SKU";
+            echo "Found item by SKU, adding to stock";
+
+            echo "<br>";
+
+            if ($location) {
+                echo "Found location, adding stock";
+                echo "<br>";
+                $stock = $item->getStockFromLocation($location);
+                $reason = Input::get('reason');
+                $cost = Input::get('price');
+                $stock->put(Input::get('new_quantity'), $reason, $cost);
+            }
+
         } else {
             echo "Could not find sku for item '" . $newStock . "'";
+            echo "<br>";
         }
 
         echo "Item 1 SKU:";
+        echo "<br>";
         $item = Inventory::find(1);
         echo $item->sku_code;
+        echo "<br>";
 
     }
 

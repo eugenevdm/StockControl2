@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('movements', 'MovementsController@index');
+
+Route::get('locations', 'LocationsController@index');
+
 Route::get('receive', 'ReceiveController@index');
 
 Route::get('api', 'ProductsController@json');

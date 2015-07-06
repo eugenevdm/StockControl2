@@ -61,7 +61,8 @@
                 </form>
                 <ul class="nav navbar-nav">
                     <li><a href="/start/">Start Stock Control</a></li>
-                    <li><a href="/products/">Products</a></li>
+                    <li><a href="/movements/">Movements</a></li>
+                    <li><a href="/locations/">Locations</a></li>
                     <li><a href="/people/">People</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

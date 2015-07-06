@@ -8,19 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Stevebauman\Inventory\Models\Location;
 
-
-//namespace App\Http\Controllers;
-
-use App\Project;
-use App\User;
-use DB;
-use Illuminate\Pagination\Paginator;
-use Input;
-use Auth;
-//use Illuminate\Http\Request;
-use Redirect;
-
-class ScanController extends Controller
+class LocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,9 +17,13 @@ class ScanController extends Controller
      */
     public function index()
     {
-        //$locations = Location::all();
-        $locations = Location::orderBy('name')->lists('name', 'id');
-        return view('scan', compact('locations'));
+        //$locations = Location::find(1)->name;
+        $locations = Location::get();
+        foreach ($locations as $location) {
+            //dd($location->name);
+        }
+        //dd($locations->attributes->name);
+        return view ('locations.index', compact('locations'));
     }
 
     /**

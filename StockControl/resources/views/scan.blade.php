@@ -17,16 +17,30 @@
             <input name="sku" id="sku" type="text" class="form-control" placeholder="SKU">
         </div>
 
-        <div class="form-group" id="multiple-datasets">
+        <div class="form-group">
             <input name="price" id="price" type="text" class="form-control" placeholder="Price">
         </div>
 
-        <div class="form-group" id="multiple-datasets">
-            <input name="qty" id="qty" type="text" class="form-control" placeholder="Quantity in stock">
+        <div class="form-group">
+            <input name="quantity" id="quantity" type="text" class="form-control" placeholder="Quantity in stock">
         </div>
 
-        <div class="form-group" id="multiple-datasets">
-            <input name="newQty" id="newQty" type="number" required type="text" class="form-control" placeholder="Quantity received">
+        <div class="form-group">
+            <input name="new_quantity" id="new_quantity" type="number" required type="text" class="form-control" placeholder="Quantity received">
+        </div>
+
+        <div class="form-group">
+            <input name="reason" id="reason" type="text" class="form-control" required placeholder="Enter reason" value="Courier delivery">
+        </div>
+
+        <div class="form-group">
+            {!! Form::label('location', 'Location') !!}
+            {!! Form::select(
+            'location_id',
+            $locations,
+            null,
+            ['class' => 'form-control']
+            ) !!}
         </div>
 
         <button type="submit" class="btn btn-default">Continue</button>
@@ -83,8 +97,8 @@
         $('input[name=name]').on('typeahead:selected', function (evt, item) {
             $('#sku').val(item.code);
             $('#price').val(item.price);
-            $('#qty').val(item.quantity);
-            $("#newQty").focus();
+            $('#quantity').val(item.quantity);
+            $("#new_quantity").focus();
         });
 
     </script>
