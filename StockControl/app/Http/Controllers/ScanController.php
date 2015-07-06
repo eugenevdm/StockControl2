@@ -22,6 +22,7 @@ use Redirect;
 
 class ScanController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +32,8 @@ class ScanController extends Controller
     {
         //$locations = Location::all();
         $locations = Location::orderBy('name')->lists('name', 'id');
-        return view('scan', compact('locations'));
+        $movements = DB::table('inventory_stock_movements')->orderBy('created_at', 'desc')->limit(5)->get();
+        return view('scan', compact('locations', 'movements'));
     }
 
     /**

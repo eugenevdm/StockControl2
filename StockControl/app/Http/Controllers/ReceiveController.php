@@ -1,11 +1,8 @@
 <?php
 
-/**
- * IFRS International Framework Regular Standards
- */
-
 namespace App\Http\Controllers;
 
+use Redirect;
 use Stevebauman\Inventory\Models\Location;
 use Stevebauman\Inventory\Models\Category;
 use Stevebauman\Inventory\Models\Metric;
@@ -14,7 +11,6 @@ use Input;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class ReceiveController extends Controller
 {
@@ -25,38 +21,28 @@ class ReceiveController extends Controller
      */
     public function index()
     {
-        $newStock = Input::get('name');
-        echo "Name: " . $newStock;
-        echo "<br>";
-
         $item = Inventory::findBySku(Input::get('sku'));
         $location = Location::find(Input::get('location_id'));
 
         if ($item) {
-            echo "Found item by SKU, adding to stock";
-
-            echo "<br>";
-
             if ($location) {
-                echo "Found location, adding stock";
-                echo "<br>";
+                //echo "Found location, adding stock";
+                //echo "<br>";
                 $stock = $item->getStockFromLocation($location);
                 $reason = Input::get('reason');
                 $cost = Input::get('price');
                 $stock->put(Input::get('new_quantity'), $reason, $cost);
+            } else {
+                // Location not found
             }
-
         } else {
-            echo "Could not find sku for item '" . $newStock . "'";
-            echo "<br>";
+            // Item not found
         }
-
-        echo "Item 1 SKU:";
-        echo "<br>";
-        $item = Inventory::find(1);
-        echo $item->sku_code;
-        echo "<br>";
-
+        //$locations = Location::orderBy('name')->lists('name', 'id');
+        //return view('scan', compact('locations'))->with('message', 'Product added to stock');
+        // TODO ->with('message', 'xxx') doesn't work
+        return redirect('scan')->with('message', 'Product added to stock');
+        //Redirect::route('scan',compact('locations'))->with('message', 'Product added to stock');
     }
 
     public function StockCreationExample()

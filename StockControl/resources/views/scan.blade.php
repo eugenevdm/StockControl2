@@ -46,14 +46,47 @@
         <button type="submit" class="btn btn-default">Continue</button>
     </form>
 
+    <hr>
+
+    <h3>Last 5 movements</h3>
+
     {{--
-        {!! Form::open(['url' => '/profile', 'method' => 'get']) !!}
-        <div id="multiple-datasets">
-            {!! Form::text('user', null, ['class'=>'typeahead tt-input']) !!}
-            {!! Form::submit('GO') !!}
-        </div>
-        {!! Form::close() !!}
-    --}}
+       {!! Form::open(['url' => '/profile', 'method' => 'get']) !!}
+       <div id="multiple-datasets">
+           {!! Form::text('user', null, ['class'=>'typeahead tt-input']) !!}
+           {!! Form::submit('GO') !!}
+       </div>
+       {!! Form::close() !!}
+   --}}
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Item</th>
+            <th>User</th>
+            <th>Before</th>
+            <th>After</th>
+            <th>Cost</th>
+            <th>Reason</th>
+        </tr>
+        </thead>
+        <tbody class="table">
+
+        @foreach ($movements as $movement)
+            <tr>
+                <td>{{ $movement->created_at }}</td>
+                <td>{{ $movement->stock_id }}</td>
+                <td>{{ $movement->user_id }}</td>
+                <td>{{ $movement->before }}</td>
+                <td>{{ $movement->after }}</td>
+                <td>{{ $movement->cost }}</td>
+                <td>{{ $movement->reason }}</td>
+            </tr>
+        @endforeach
+
+        </tbody>
+    </table>
 
     <link rel="stylesheet" href="/css/search.css">
 
@@ -80,13 +113,14 @@
         });
 
         $('#multiple-datasets .typeahead').typeahead({
+                    autoselect : true,
                     highlight: true
                 },
                 {
                     name: 'products-list',
+                    source: the_products,
                     minLength: 2,
                     display: 'name',
-                    source: the_products,
                     templates: {
                         empty: ['<h4 class="item-type-name">Products</h4><h6 class="empty-message">No products</h6>'],
                         header: '<h4 class="item-type-name">Products</h4>'

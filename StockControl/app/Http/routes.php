@@ -19,7 +19,9 @@ Route::get('receive', 'ReceiveController@index');
 
 Route::get('api', 'ProductsController@json');
 
-Route::get('scan', 'ScanController@index');
+Route::resource('scan', 'ScanController');
+//Route::get('scan', 'ScanController@index');
+//Route::resource('project.tasklist.task', 'TaskController');
 
 Route::get('products', 'ProductsController@index');
 
