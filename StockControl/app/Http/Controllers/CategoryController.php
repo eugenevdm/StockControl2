@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Stevebauman\Inventory\Models\Category;
+use Input;
 
 class CategoryController extends Controller
 {
