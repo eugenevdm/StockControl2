@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <h3>Stock In</h3>
+    <h3>Stock Out</h3>
 
-    <form role="scan" action="receive">
+    <form role="scan" action="remove">
 
         <div class="form-group" id="multiple-datasets">
             <input name="name" id="name" required type="text" class="typeahead tt-input form-control"
@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <input name="reason" id="reason" type="text" class="form-control" required placeholder="Enter reason" value="Courier delivery">
+            <input name="reason" id="reason" type="text" class="form-control" required placeholder="Enter reason">
         </div>
 
         <div class="form-group">
@@ -47,15 +47,6 @@
     <hr>
 
     <h3>Last 5 movements</h3>
-
-    {{--
-       {!! Form::open(['url' => '/profile', 'method' => 'get']) !!}
-       <div id="multiple-datasets">
-           {!! Form::text('user', null, ['class'=>'typeahead tt-input']) !!}
-           {!! Form::submit('GO') !!}
-       </div>
-       {!! Form::close() !!}
-   --}}
 
     <table class="table table-hover">
         <thead>

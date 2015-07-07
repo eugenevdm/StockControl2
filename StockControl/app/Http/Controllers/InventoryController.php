@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
+use Input;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -61,7 +64,8 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $inventory = Inventory::find($id);
+        return view('inventory.edit', compact('inventory'));
     }
 
     /**
@@ -72,7 +76,10 @@ class InventoryController extends Controller
      */
     public function update($id)
     {
-        //
+        $input = Input::all();
+        Inventory::find($id)->update($input);
+
+        return Redirect::route('inventory.index')->with('message', 'Inventory item updated.');
     }
 
     /**

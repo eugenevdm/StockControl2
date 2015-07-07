@@ -49,6 +49,9 @@
                     <td>
                         {{ $supplier->url }}
                     </td>
+                    <td width="1%">
+                        {!! link_to_route('supplier.edit', 'Edit', array($supplier->id), array('class' => 'btn btn-info')) !!}
+                    </td>
                 <tr>
             @endforeach
             </tbody>

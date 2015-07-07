@@ -6,23 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Stevebauman\Inventory\Models\Location;
+use Illuminate\Support\Facades\Redirect;
+use Stevebauman\Inventory\Models\Category;
 
-
-//namespace App\Http\Controllers;
-
-use App\Project;
-use App\User;
-use DB;
-use Illuminate\Pagination\Paginator;
-use Input;
-use Auth;
-//use Illuminate\Http\Request;
-use Redirect;
-
-class ScanController extends Controller
+class CategoryController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -30,10 +18,8 @@ class ScanController extends Controller
      */
     public function index()
     {
-        //$locations = Location::all();
-        $locations = Location::orderBy('name')->lists('name', 'id');
-        $movements = DB::table('inventory_stock_movements')->orderBy('created_at', 'desc')->limit(5)->get();
-        return view('scan', compact('locations', 'movements'));
+        $categories = Category::paginate(10);
+        return view('category.index', compact('categories', 'paginator'));
     }
 
     /**
@@ -75,7 +61,8 @@ class ScanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -86,7 +73,10 @@ class ScanController extends Controller
      */
     public function update($id)
     {
-        //
+        $input = Input::all();
+        Category::find($id)->update($input);
+
+        return Redirect::route('category.index')->with('message', 'Category updated.');
     }
 
     /**

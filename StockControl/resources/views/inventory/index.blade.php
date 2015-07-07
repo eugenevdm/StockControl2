@@ -18,7 +18,8 @@
             <tr>
                 <th>SKU</th>
                 <th>Category</th>
-                <th>Item</th>
+                <th>Name</th>
+                <th>Description</th>
                 <th>Qty</th>
                 <th>Price</th>
                 <th>Supplier</th>
@@ -38,6 +39,9 @@
                         {{ $inventory->name }}
                     </td>
                     <td>
+                        {{ $inventory->description }}
+                    </td>
+                    <td>
                         {{ $inventory->stocks()->find(1)->quantity }}
                     </td>
                     <td>
@@ -51,6 +55,9 @@
                     </td>
                     <td>
                         {{ $inventory->url }}
+                    </td>
+                    <td width="1%">
+                        {!! link_to_route('inventory.edit', 'Edit', array($inventory->id), array('class' => 'btn btn-info')) !!}
                     </td>
                 <tr>
             @endforeach

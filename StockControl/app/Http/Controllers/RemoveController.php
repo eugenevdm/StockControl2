@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ReceiveController extends Controller
+class RemoveController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +31,7 @@ class ReceiveController extends Controller
                 $stock = $item->getStockFromLocation($location);
                 $reason = Input::get('reason');
                 $cost = Input::get('price');
-                $stock->put(Input::get('new_quantity'), $reason, $cost);
+                $stock->remove(Input::get('new_quantity'), $reason, $cost);
             } else {
                 // Location not found
             }
@@ -41,7 +41,7 @@ class ReceiveController extends Controller
         //$locations = Location::orderBy('name')->lists('name', 'id');
         //return view('scan', compact('locations'))->with('message', 'Product added to stock');
         // TODO ->with('message', 'xxx') doesn't work
-        return redirect('scan')->with('message', 'Product added to stock');
+        return redirect('stockout')->with('message', 'Inventory item removed from stock.');
         //Redirect::route('scan',compact('locations'))->with('message', 'Product added to stock');
     }
 

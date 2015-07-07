@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use Input;
 use Stevebauman\Inventory\Models\Supplier;
 
 class SupplierController extends Controller
@@ -60,7 +62,8 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        return view('supplier.edit', compact('supplier'));
     }
 
     /**
@@ -71,7 +74,10 @@ class SupplierController extends Controller
      */
     public function update($id)
     {
-        //
+        $input = Input::all();
+        Supplier::find($id)->update($input);
+
+        return Redirect::route('supplier.index')->with('message', 'Supplier record updated.');
     }
 
     /**

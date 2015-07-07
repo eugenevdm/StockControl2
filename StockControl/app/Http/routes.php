@@ -15,6 +15,8 @@
 |
 */
 
+Route::resource('category', 'CategoryController');
+
 Route::resource('supplier', 'SupplierController');
 
 Route::resource('inventory', 'InventoryController');
@@ -23,15 +25,16 @@ Route::get('home', 'MovementsController@index');
 
 Route::get('movements', 'MovementsController@index');
 
-Route::get('locations', 'LocationsController@index');
+//Route::get('location', 'LocationsController@index');
 
-Route::get('receive', 'ReceiveController@index');
+Route::get('add', 'AddController@index');
+Route::get('remove', 'RemoveController@index');
+
+Route::resource('stockin', 'StockInController');
+Route::resource('stockout', 'StockOutController');
+Route::resource('location', 'LocationsController');
 
 Route::get('api', 'ProductsController@json');
-
-Route::resource('scan', 'ScanController');
-//Route::get('scan', 'ScanController@index');
-//Route::resource('project.tasklist.task', 'TaskController');
 
 Route::get('products', 'ProductsController@index');
 
@@ -45,6 +48,7 @@ Route::get('start', 'StartController@index');
 Route::get('oauth/{provider?}', 'Auth\SocialAuthController@login');
 
 Route::get('/', 'WelcomeController@index');
+
 //Route::get('/', function () {
 //    return view('welcome');
 //});

@@ -42,21 +42,21 @@
 
                     <li><a href="start/">Start</a></li>
 
-                    <li><a href="inventory/">Inventory</a></li>
+                    <li><a href="/inventory/">Inventory</a></li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Stock <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="scan">Stock In</a></li>
+                            <li><a href="stockin/">Stock In</a></li>
                             <li><a href="stockout">Stock Out</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="locations">Locations</a></li>
+                            <li><a href="location">Locations</a></li>
                             <li><a href="movements">Movements</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Supplier <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Suppliers <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="supplier">List suppliers</a></li>
                             <li role="separator" class="divider"></li>
@@ -64,7 +64,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="/categories/">Categories</a></li>
+                    <li><a href="/category/">Categories</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

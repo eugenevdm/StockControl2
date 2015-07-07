@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Input;
-
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 use Stevebauman\Inventory\Models\Location;
 
-class LocationsController extends Controller
+
+//namespace App\Http\Controllers;
+
+use App\Project;
+use App\User;
+use DB;
+use Illuminate\Pagination\Paginator;
+use Input;
+use Auth;
+//use Illuminate\Http\Request;
+use Redirect;
+
+class StockInController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -20,13 +30,9 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        //$locations = Location::find(1)->name;
-        $locations = Location::get();
-        foreach ($locations as $location) {
-            //dd($location->name);
-        }
-        //dd($locations->attributes->name);
-        return view ('location.index', compact('locations'));
+        $locations = Location::orderBy('name')->lists('name', 'id');
+        $movements = DB::table('inventory_stock_movements')->orderBy('created_at', 'desc')->limit(5)->get();
+        return view('stockin.index', compact('locations', 'movements'));
     }
 
     /**
@@ -68,8 +74,7 @@ class LocationsController extends Controller
      */
     public function edit($id)
     {
-        $location = Location::find($id);
-        return view('location.edit', compact('location'));
+        //
     }
 
     /**
@@ -80,11 +85,7 @@ class LocationsController extends Controller
      */
     public function update($id)
     {
-        $input = Input::all();
-        Location::find($id)->update($input);
-
-        return Redirect::route('location.index')->with('message', 'Location updated.');
-
+        //
     }
 
     /**
