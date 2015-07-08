@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cat;
 use DB;
+use Stevebauman\Inventory\Models\Category;
 use Stevebauman\Inventory\Models\Inventory;
 use Response;
 use \App\Product;
@@ -60,39 +62,65 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //\Excel::load('miro.xlsx', function($reader) {
-        //\Excel::load('Untitled 1.xlsx', function($reader) {
         \Excel::load('MiRO_All Products_Pricelist.xls', function ($reader) {
 
             // Get workbook title
             $results = $reader->get();
             $workbookTitle = $results->getTitle();
-            echo "Title: " . $workbookTitle;
+            echo "workbookTitle: " . $workbookTitle . "<br>";
 
-            //$results = $reader->get();
-            //dd($results);
-
-            $n = 0;
+//            $n = 0;
 
             foreach ($results as $sheet) {
                 // get sheet title
                 $sheetTitle = $sheet->getTitle();
-                echo "Sheet: " . $sheetTitle;
+                echo "sheetTitle: " . $sheetTitle . "<br>";
+                // Check if Category exists, and if so, get category ID
+                $category = Cat::where('name', $sheetTitle)->first();
+                if ($category) {
+                    //echo "Category exists id'" . $category->id . "'<br>";
+                } else {
+                    echo "Category does not exist, now adding<br>";
+                    $category = new Cat();
+                    $category->name = $sheetTitle;
+                    $category->save();
+                }
                 foreach ($sheet as $cells) {
-                    //echo "Data: ";
-                    $n = $n + 1;
-                    if ($n > 1) {
-                        dd($cells);
+                    // Check if it's an empty line, and if so, assume this is a subcategory
+
+                    // Check if valid data before loading into products array
+                    if ($cells->sku && $cells->name && $cells->qty_1) {
+                        // Check if product exists, if not, add it
+                        //echo "Sheet sku: " . $cells->sku . "<br>";
+                        $product = Product::where('sku', $cells->sku)->first();
+                        if ($product) {
+                            // Update product
+                            //echo "Found a product with this SKU, updating<br>";
+                            $product->name = $cells->name;
+                            $product->price1 = $cells->qty_1;
+                            $product->cat_id = $category->id;
+                            $product->save();
+                        } else {
+                            // Create product
+                            echo "Can't find a product with this SKU, creating<br>";
+                            $product = new Product();
+                            $product->sku = $cells->sku;
+                            $product->name = $cells->name;
+                            $product->price1 = $cells->qty_1;
+                            $product->cat_id = $category->id;
+                            $product->save();
+                        }
+
                     }
+
+//                    $n = $n + 1;
+//                    if ($n > 10) {
+//                        //break;
+//                        dd($cells);
+//                    }
+
                 }
             }
-
-            // reader methods
-            // Getting all results
-            //$results = $reader->get();
-            //dd($results);
-
-            //dd($results->first());
 
         });
     }
